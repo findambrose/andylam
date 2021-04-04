@@ -14,7 +14,7 @@
 	<name>Andy-Lam</name>
 	<description>BlockchainVoting</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>15</java.version>
 		<kotlin.version>1.5.0-M2</kotlin.version>
 	</properties>
 	<dependencies>
@@ -140,7 +140,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<jvmTarget>1.8</jvmTarget>
+					<jvmTarget>15</jvmTarget>
 				</configuration>
 			</plugin>
 			<plugin>
