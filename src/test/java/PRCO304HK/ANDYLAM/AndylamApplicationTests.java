@@ -1,10 +1,10 @@
-package PRCO304HK.Andy.Lam;
+package PRCO304HK.ANDYLAM;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AndyLamApplicationTests {
+class AndylamApplicationTests {
 
 	@Test
 	void contextLoads() {

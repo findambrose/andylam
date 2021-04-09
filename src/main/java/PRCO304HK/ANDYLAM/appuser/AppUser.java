@@ -1,4 +1,4 @@
-package PRCO304HK.appuser;
+package PRCO304HK.ANDYLAM.appuser;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Collections;
 
 @Getter
@@ -16,15 +17,15 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-
 public class AppUser implements UserDetails {
 
-    @Id
+
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",
             allocationSize = 1
     )
+    @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
@@ -36,8 +37,8 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
     public AppUser(String firstName,
                    String lastName,
@@ -49,18 +50,17 @@ public class AppUser implements UserDetails {
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
-        this.locked = locked = false;
-        this.enabled = enabled = false;
     }
 
-    @java.lang.Override
-    public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singletonList(authority);
     }
 
-    @java.lang.Override
-    public java.lang.String getPassword() {
+    @Override
+    public String getPassword() {
         return password;
     }
 
@@ -69,30 +69,30 @@ public class AppUser implements UserDetails {
         return email;
     }
 
-    public java.lang.String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public java.lang.String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    @java.lang.Override
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean isAccountNonLocked() {
         return !locked;
     }
 
-    @java.lang.Override
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean isEnabled() {
         return enabled;
     }

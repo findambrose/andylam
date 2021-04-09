@@ -1,6 +1,6 @@
-package PRCO304HK.registration.token;
+package PRCO304HK.ANDYLAM.registration.token;
 
-import PRCO304HK.appuser.AppUser;
+import PRCO304HK.ANDYLAM.appuser.AppUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,17 +14,16 @@ import java.time.LocalDateTime;
 @Entity
 public class ConfirmationToken {
 
-    @Id
     @SequenceGenerator(
             name = "confirmation_token_sequence",
             sequenceName = "confirmation_token_sequence",
             allocationSize = 1
     )
+    @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "confirmation_token_sequence"
     )
-
     private Long id;
 
     @Column(nullable = false)
@@ -45,11 +44,13 @@ public class ConfirmationToken {
     )
     private AppUser appUser;
 
-    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, AppUser appUser) {
+    public ConfirmationToken(String token,
+                             LocalDateTime createdAt,
+                             LocalDateTime expiresAt,
+                             AppUser appUser) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.confirmedAt = confirmedAt;
         this.appUser = appUser;
     }
 }

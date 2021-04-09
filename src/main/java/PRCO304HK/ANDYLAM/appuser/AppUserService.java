@@ -1,8 +1,7 @@
-package PRCO304HK.appuser;
+package PRCO304HK.ANDYLAM.appuser;
 
-
-import PRCO304HK.registration.token.ConfirmationToken;
-import PRCO304HK.registration.token.ConfirmationTokenService;
+import PRCO304HK.ANDYLAM.registration.token.ConfirmationToken;
+import PRCO304HK.ANDYLAM.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,27 +24,35 @@ public class AppUserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
         return appUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                String.format(USER_NOT_FOUND_MSG, email)));
     }
 
     public String signUpUser(AppUser appUser) {
-        boolean userExist = appUserRepository.findByEmail(appUser.getEmail())
+        boolean userExists = appUserRepository
+                .findByEmail(appUser.getEmail())
                 .isPresent();
 
-        if(userExist) {
-            throw new IllegalStateException("Email Already taken");
+        if (userExists) {
+            // TODO check of attributes are the same and
+            // TODO if email not confirmed send confirmation email.
+
+            throw new IllegalStateException("email already taken");
         }
 
-        String encodePassword = bCryptPasswordEncoder.encode(appUser.getPassword());
+        String encodedPassword = bCryptPasswordEncoder
+                .encode(appUser.getPassword());
 
-        appUser.setPassword(encodePassword);
+        appUser.setPassword(encodedPassword);
 
         appUserRepository.save(appUser);
 
         String token = UUID.randomUUID().toString();
-        // TODO: Send confirmation token
+
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
@@ -53,7 +60,15 @@ public class AppUserService implements UserDetailsService {
                 appUser
         );
 
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
+        confirmationTokenService.saveConfirmationToken(
+                confirmationToken);
+
+//        TODO: SEND EMAIL
+
         return token;
+    }
+
+    public int enableAppUser(String email) {
+        return appUserRepository.enableAppUser(email);
     }
 }

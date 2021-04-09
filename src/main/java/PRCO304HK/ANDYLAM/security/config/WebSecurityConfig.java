@@ -1,6 +1,6 @@
-package PRCO304HK.security.config;
+package PRCO304HK.ANDYLAM.security.config;
 
-import PRCO304HK.appuser.AppUserService;
+import PRCO304HK.ANDYLAM.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserService appUserService;
@@ -26,8 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/api/v*/registration/**")
-                    .permitAll()
+                .antMatchers("/api/v*/registration/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated().and()
                 .formLogin();
@@ -40,10 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-      DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-      provider.setPasswordEncoder(bCryptPasswordEncoder);
-      provider.setUserDetailsService(appUserService);
-      return provider;
-
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
+        provider.setUserDetailsService(appUserService);
+        return provider;
     }
 }

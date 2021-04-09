@@ -1,4 +1,4 @@
-package PRCO304HK.security;
+package PRCO304HK.ANDYLAM.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,13 +1,13 @@
-package PRCO304HK.Andy.Lam;
+package PRCO304HK.ANDYLAM;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AndyLamApplication {
+public class AndylamApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AndyLamApplication.class, args);
+		SpringApplication.run(AndylamApplication.class, args);
 	}
 
 }

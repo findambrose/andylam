@@ -1,4 +1,4 @@
-package PRCO304HK.registration;
+package PRCO304HK.ANDYLAM.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-
 public class RegistrationRequest {
     private final String firstName;
     private final String lastName;
