@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--begin::Head-->
 	<head><base >
 		<meta charset="utf-8" />
-		<title>BlockVote | New Contest</title>
+		<title>BlockVote | Edit Contestant</title>
 		<meta name="description" content="User profile personal information example" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!--begin::Fonts-->
@@ -77,11 +77,11 @@ License: You must have a valid license purchased only from themeforest(the above
 												</div>
 											</div>
 											<!--begin::Form-->
-											<form th:action = "@{/contests}" th:object = "${contest}" method="post" class="form">
+											<form th:action = "@{/contestants/update}" th:object = "${updateContestant}" method="post" class="form">
 												<div class="card-body">
 													<div class="form-group">
 														<label>Contest Name:</label>
-														<input type="text" class="form-control form-control-solid" placeholder="Enter Contest Name" />
+														<input type="text" th:value = "${contestant.name}}" class="form-control form-control-solid" placeholder="Enter Contest Name" />
 														<span class="form-text text-muted">Please enter the contest name</span>
 													</div>
 													<!--begin: Code-->

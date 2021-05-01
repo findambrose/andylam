@@ -1,6 +1,7 @@
 package PRCO304HK.ANDYLAM.contestants;
 
 
+import PRCO304HK.ANDYLAM.contests.Contest;
 import PRCO304HK.ANDYLAM.results.Result;
 import PRCO304HK.ANDYLAM.results.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,16 @@ public class ContestantService {
         _initial.setCount(0);
         resultService.updateVote(_initial);
         return contestantRepository.save(c);
+    }
+
+    public void update(Contest contest) {
+        //TODO: Update contest
+    }
+
+    public void delete(int id) {
+
+        Contestant contestant = new Contestant();
+        contestant.setId(id);
+        contestantRepository.delete(contestant);
     }
 }

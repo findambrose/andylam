@@ -22,7 +22,7 @@
 <div class="container text-center">
       
         <div>
-            <h1>All Contests</h1>
+            <h1>All Users</h1>
         </div>
          
         <div>
@@ -30,19 +30,19 @@
                 <thead class="thead-light">
                 <tr>
                         <th>No.</th>
-                        <th>Contest ID</th>
-                        <th>Contest Name</th>
+                        <th>User ID/ Passport Number</th>
+                        <th>User's Fullname</th>
                         <th>Actions</th>
                     </tr>
             </thead>
                 <tbody>
-                <tr th:each="contest, iteration: ${contests}">
+                <tr th:each="user, iteration: ${users}">
                         <td th:text='${iteration.index+1}'>No.</td>
-                        <td th:text="${contest.id}">Contest Id</td>
-                        <td th:text="${contest.name}">Contest Name</td> 
+                        <td th:text="${user.id}">User Id</td>
+                        <td th:text="${user.name}"> Name</td> 
                         <td>
-                            <a th:href="@{/contests/edit/{id}(id = ${contest.id})}" class="btn btn-primary">Edit</a>
-                            <a style="margin-top: 10px" th:href="@{/contests/delete/{id}(id = ${contest.id})}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/users/edit/{id}(id = ${user.id})}" class="btn btn-primary">Edit</a>
+                            <a style="margin-top: 10px" th:href="@{/users/delete/{id}(id = ${user.id})}" class="btn btn-danger">Delete</a>
                        </td>
                     </tr>
             </tbody>

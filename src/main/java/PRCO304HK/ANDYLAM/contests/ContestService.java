@@ -23,4 +23,15 @@ public class ContestService {
         return contestRepository.save(c);
 
     }
+
+    public void update(Contest contest) {
+        //TODO: Update contest
+    }
+
+    public void delete(int id) {
+
+        Contest contest = new Contest();
+        contest.setId(id);
+        contestRepository.delete(contest);
+    }
 }
