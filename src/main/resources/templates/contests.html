@@ -1,0 +1,55 @@
+<!--
+1. List students
+2. Add student
+3. Add course
+4. Add Modules
+5. Assign Course Modules
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+         <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>BlockVote | Contests</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container text-center">
+      
+        <div>
+            <h1>All Contests</h1>
+        </div>
+         
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-light">
+                <tr>
+                        <th>No.</th>
+                        <th>Contest ID</th>
+                        <th>Contest Name</th>
+                    </tr>
+            </thead>
+                <tbody>
+                <tr th:each="contest, iteration: ${contests}">
+                        <td th:text='${iteration.index+1}'>No.</td>
+                        <td th:text="${contest.id}">Contest Id</td>
+                        <td th:text="${contest.name}">Contest Name</td> 
+                        <td>
+                            <a th:href="@{/contests/edit/{id}(id = ${contest.id})}" class="btn btn-primary">Edit</a>
+                            <a style="margin-top: 10px" th:href="@{/contests/delete/{id}(id = ${contest.id})}" class="btn btn-danger">Delete</a>
+                       </td>
+                    </tr>
+            </tbody>
+            </table>
+        </div>
+</div>
+<script type="text/javascript" src="/jquery.min.js/"></script>
+<script type="text/javascript" src="/bootstrap.min.js"></script>
+</body>
+
+</html>

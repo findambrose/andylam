@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--begin::Head-->
 	<head><base >
 		<meta charset="utf-8" />
-		<title>BlockVote | User Profile</title>
+		<title>BlockVote | New Contestant</title>
 		<meta name="description" content="User profile personal information example" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!--begin::Fonts-->
@@ -64,92 +64,98 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div style="width: 100%; margin-left: -130px; margin-top: -120px" class="container">
 								<!--begin::Profile Personal Information-->
 								<div class="">
-									<!--begin::Aside-->
-									
-									<!--end::Aside-->
-									<!--begin::Content-->
-									<div style="width: 100%" class="flex-row-fluid">
+									<div class="col">
 										<!--begin::Card-->
-										<div class="card card-custom card-stretch">
-											<!--begin::Header-->
-											<div class="card-header py-3">
-												<div class="card-title align-items-start flex-column">
-													<h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-												
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Add New Contest</h3>
+												<div class="card-toolbar">
+													<div class="example-tools justify-content-center">
+														<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+														<span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+													</div>
 												</div>
-												
 											</div>
-											<!--end::Header-->
 											<!--begin::Form-->
-											<form class="form">
-												<!--begin::Body-->
+											<form th:action = "@{/contests}" th:object = "${contest}" method="post" class="form">
 												<div class="card-body">
-													<div class="row">
-														<label class="col-xl-3"></label>
-														<div class="col-lg-9 col-xl-6">
-															<h5 class="font-weight-bold mb-6">Personal Info</h5>
-														</div>
+													<div class="form-group">
+														<label>Contest Name:</label>
+														<input type="text" class="form-control form-control-solid" placeholder="Enter Contest Name" />
+														<span class="form-text text-muted">Please enter the contest name</span>
 													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label text-right">Avatar</label>
-														<div class="col-lg-9 col-xl-6">
-															<div class="image-input image-input-outline" id="kt_profile_avatar"   th:style="'background: url(assets/media/users/blank.png);'">
-																<div class="image-input-wrapper" style=""></div>
-																
-																<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-																	<i class="ki ki-bold-close icon-xs text-muted"></i>
-																</span>
-																
-															</div>
-															<span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label text-right">First Name</label>
-														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" disabled type="text" th:value="${user.firstName}" />
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label text-right">Last Name</label>
-														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" th:value="${user.lastName}" />
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label text-right" >Role</label>
-														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" th:value="${user.role}" />
-														
-														</div>
-													</div>
-													<div class="row">
-														<label class="col-xl-3"></label>
-														<div class="col-lg-9 col-xl-6">
-															<h5 class="font-weight-bold mt-10 mb-6">Contact Info</h5>
-														</div>
-													</div>
-													<div class="form-group row">
-														<label class="col-xl-3 col-lg-3 col-form-label text-right">Email Address</label>
-														<div class="col-lg-9 col-xl-6">
-															<div class="input-group input-group-lg input-group-solid">
-																<div class="input-group-prepend">
-																	<span class="input-group-text">
-																		<i class="la la-phone"></i>
-																	</span>
+													<!--begin: Code-->
+													<div class="example-code mt-10">
+														<ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
+															<li class="nav-item">
+																<a class="nav-link active" data-toggle="tab" href="#example_code_html">HTML</a>
+															</li>
+														</ul>
+														<div class="tab-content">
+															<div class="tab-pane active" id="example_code_html" role="tabpanel">
+																<div class="example-highlight">
+																	<pre style="height:400px">
+<code class="language-html">
+        &lt;form class="form"&gt;
+         &lt;div class="card-body"&gt;
+          &lt;div class="form-group"&gt;
+           &lt;label&gt;Full Name:&lt;/label&gt;
+           &lt;input type="email" class="form-control form-control-solid" placeholder="Enter full name"/&gt;
+           &lt;span class="form-text text-muted"&gt;Please enter your full name&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group"&gt;
+           &lt;label&gt;Email address:&lt;/label&gt;
+           &lt;input type="email" class="form-control form-control-solid" placeholder="Enter email"/&gt;
+           &lt;span class="form-text text-muted"&gt;We'll never share your email with anyone else&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group"&gt;
+           &lt;label&gt;Subscription&lt;/label&gt;
+           &lt;div class="input-group input-group-lg"&gt;
+            &lt;div class="input-group-prepend"&gt;&lt;span class="input-group-text" &gt;$&lt;/span&gt;&lt;/div&gt;
+            &lt;input type="text" class="form-control form-control-solid" placeholder="99.9"/&gt;
+           &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group"&gt;
+           &lt;label&gt;Communication:&lt;/label&gt;
+           &lt;div class="checkbox-list"&gt;
+            &lt;label class="checkbox"&gt;
+             &lt;input type="checkbox"/&gt; Email
+             &lt;span&gt;&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;label class="checkbox"&gt;
+             &lt;input type="checkbox"/&gt; SMS
+             &lt;span&gt;&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;label class="checkbox"&gt;
+             &lt;input type="checkbox"/&gt; Phone
+             &lt;span&gt;&lt;/span&gt;
+            &lt;/label&gt;
+           &lt;/div&gt;
+          &lt;/div&gt;
+         &lt;/div&gt;
+         &lt;div class="card-footer"&gt;
+          &lt;button type="reset" class="btn btn-primary mr-2"&gt;Submit&lt;/button&gt;
+          &lt;button type="reset" class="btn btn-secondary"&gt;Cancel&lt;/button&gt;
+         &lt;/div&gt;
+        &lt;/form&gt;
+        </code>
+</pre>
 																</div>
-																<input type="text" class="form-control form-control-lg form-control-solid" th:value="${user.email}" placeholder="Phone" />
 															</div>
-															<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 														</div>
 													</div>
+													<!--end: Code-->
 												</div>
-												<!--end::Body-->
+												<div class="card-footer">
+													<button type="submit" class="btn btn-primary mr-2">Submit</button>
+													<button type="reset" class="btn btn-secondary">Cancel</button>
+												</div>
 											</form>
 											<!--end::Form-->
 										</div>
+										<!--end::Card-->
+										
 									</div>
-									<!--end::Content-->
 								</div>
 								<!--end::Profile Personal Information-->
 							</div>
@@ -182,7 +188,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--begin::Header-->
 				<div class="d-flex align-items-center mt-5">
 					<div class="symbol symbol-100 mr-5">
-						<div class="symbol-label"  th:style="'background: url(assets/media/users/300_21.jpg);'" ></div>
+						<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
@@ -1701,13 +1707,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#3699FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1F0FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
 		<!--end::Global Config-->
 		<!--begin::Global Theme Bundle(used by all pages)-->
-		<script src="/assets/plugins/global/plugins.bundle.js?v=7.0.3"></script>
-		<script src="/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.3"></script>
-		<script src="/assets/js/scripts.bundle.js?v=7.0.3"></script>
+		<script src="assets/plugins/global/plugins.bundle.js?v=7.0.3"></script>
+		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.3"></script>
+		<script src="assets/js/scripts.bundle.js?v=7.0.3"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
-		<script src="/assets/js/pages/widgets.js?v=7.0.3"></script>
-		<script src="/assets/js/pages/custom/profile/profile.js?v=7.0.3"></script>
+		<script src="assets/js/pages/widgets.js?v=7.0.3"></script>
+		<script src="assets/js/pages/custom/profile/profile.js?v=7.0.3"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->
