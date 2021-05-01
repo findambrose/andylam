@@ -14,8 +14,4 @@ public class AndylamApplication {
 		SpringApplication.run(AndylamApplication.class, args);
 	}
 
-	@GetMapping
-	public String hello() {
-		return "Hello World";
-	}
 }

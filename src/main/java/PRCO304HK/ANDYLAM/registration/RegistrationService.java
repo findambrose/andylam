@@ -7,6 +7,7 @@ import PRCO304HK.ANDYLAM.email.EmailSender;
 import PRCO304HK.ANDYLAM.registration.token.ConfirmationToken;
 import PRCO304HK.ANDYLAM.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +17,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final AppUserService appUserService;
-    private final EmailValidator emailValidator;
-    private final ConfirmationTokenService confirmationTokenService;
-    private final EmailSender emailSender;
+    @Autowired
+    private AppUserService appUserService;
 
-    public String register(RegistrationRequest request) {
+    @Autowired
+    private EmailValidator emailValidator;
+
+    @Autowired
+    private ConfirmationTokenService confirmationTokenService;
+
+    @Autowired
+    private  EmailSender emailSender;
+
+    public String register(RegistrationRequest request, AppUserRole role) {
         boolean isValidEmail = emailValidator.
                 test(request.getEmail());
 
@@ -29,23 +37,35 @@ public class RegistrationService {
             throw new IllegalStateException("email not valid");
         }
 
+
+
         String token = appUserService.signUpUser(
-                new AppUser(
+               role == AppUserRole.USER ? new AppUser(
                         request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
                         AppUserRole.USER
 
-                )
+                ) : new AppUser(
+                       request.getFirstName(),
+                       request.getLastName(),
+                       request.getEmail(),
+                       request.getPassword(),
+                       AppUserRole.ADMIN
+
+               )
         );
 
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getFirstName(), link));
 
-        return token;
+                return "redirect:/login";
+
+//        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+//        emailSender.send(
+//                request.getEmail(),
+//                buildEmail(request.getFirstName(), link));
+//
+//        return token;
     }
 
     @Transactional
@@ -67,7 +87,7 @@ public class RegistrationService {
 
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(
-                confirmationToken.getAppUser().getEmail());
+                confirmationToken.getAppUser().getUsername());
         return "confirmed";
     }
 

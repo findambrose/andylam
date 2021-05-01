@@ -32,6 +32,30 @@ public class ConfirmationToken {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
+    public void setExpiresAt(LocalDateTime expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    public LocalDateTime getConfirmedAt() {
+        return confirmedAt;
+    }
+
+    public void setConfirmedAt(LocalDateTime confirmedAt) {
+        this.confirmedAt = confirmedAt;
+    }
+
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
@@ -43,6 +67,14 @@ public class ConfirmationToken {
             name = "app_user_id"
     )
     private AppUser appUser;
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     public ConfirmationToken(String token,
                              LocalDateTime createdAt,

@@ -1,18 +1,27 @@
 package PRCO304HK.ANDYLAM.registration;
 
+import PRCO304HK.ANDYLAM.appuser.AppUserRole;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor
 public class RegistrationController {
 
-    private final RegistrationService registrationService;
+    @Autowired
+    private RegistrationService registrationService;
 
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
-        return registrationService.register(request);
+    public String register(RegistrationRequest request) {
+        return registrationService.register(request, AppUserRole.USER);
+    }
+
+    @PostMapping(path = "admin")
+    public String registerAdmin(RegistrationRequest request) {
+        return registrationService.register(request, AppUserRole.ADMIN);
     }
 
     @GetMapping(path = "confirm")
