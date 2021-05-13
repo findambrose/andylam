@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 
@@ -29,12 +30,71 @@ public class RegistrationService {
     @Autowired
     private  EmailSender emailSender;
 
-    public String register(RegistrationRequest request, AppUserRole role) {
+    public String addUser(RegistrationRequest request, AppUserRole role, RedirectAttributes at) {
         boolean isValidEmail = emailValidator.
                 test(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
+            // throw new IllegalStateException("email not valid");
+            at.addAttribute("invalidemail", "Invalid email address.");
+            return "redirect:/users/add-user-page";
+        }
+
+        if (appUserService.appUserRepository.findByIdNumber(request.getIdNumber()).isPresent()) {
+
+            at.addAttribute("idinuse", "Invalid ID/ Passport Number.");
+            return "redirect:/users/add-user-page";
+            // throw new IllegalStateException("id number in use");
+        }
+
+
+
+        String token = appUserService.signUpUser(
+                role == AppUserRole.USER ? new AppUser(
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getEmail(),
+                        request.getIdNumber(),
+                        request.getPassword(),
+                        AppUserRole.USER
+
+                ) : new AppUser(
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getEmail(),
+                        request.getIdNumber(),
+                        request.getPassword(),
+                        AppUserRole.ADMIN
+
+                )
+        );
+
+
+        return "redirect:/users/get";
+
+//        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+//        emailSender.send(
+//                request.getEmail(),
+//                buildEmail(request.getFirstName(), link));
+//
+//        return token;
+    }
+
+    public String register(RegistrationRequest request, AppUserRole role, RedirectAttributes at) {
+        boolean isValidEmail = emailValidator.
+                test(request.getEmail());
+
+        if (!isValidEmail) {
+            // throw new IllegalStateException("email not valid");
+            at.addAttribute("invalidemail", "Invalid email address.");
+            return "redirect:/admin/create-account";
+        }
+
+        if (appUserService.appUserRepository.findByIdNumber(request.getIdNumber()).isPresent()) {
+
+            at.addAttribute("idinuse", "Invalid ID/ Passport Number.");
+            return "redirect:/admin/create-account";
+            // throw new IllegalStateException("id number in use");
         }
 
 
@@ -44,6 +104,7 @@ public class RegistrationService {
                         request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
+                        request.getIdNumber(),
                         request.getPassword(),
                         AppUserRole.USER
 
@@ -51,6 +112,7 @@ public class RegistrationService {
                        request.getFirstName(),
                        request.getLastName(),
                        request.getEmail(),
+                       request.getIdNumber(),
                        request.getPassword(),
                        AppUserRole.ADMIN
 

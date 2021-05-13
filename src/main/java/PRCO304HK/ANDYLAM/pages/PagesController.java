@@ -3,11 +3,9 @@ package PRCO304HK.ANDYLAM.pages;
 
 import PRCO304HK.ANDYLAM.appuser.AppUser;
 import PRCO304HK.ANDYLAM.appuser.AppUserRepository;
-import PRCO304HK.ANDYLAM.appuser.AppUserService;
+
 import PRCO304HK.ANDYLAM.contestants.Contestant;
-import PRCO304HK.ANDYLAM.contestants.ContestantRepository;
-import PRCO304HK.ANDYLAM.contests.Contest;
-import PRCO304HK.ANDYLAM.contests.ContestRepository;
+
 import PRCO304HK.ANDYLAM.registration.RegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,59 +21,46 @@ public class PagesController {
     @Autowired
     AppUserRepository appUserRepository;
 
-    @Autowired
-    ContestantRepository contestantRepository;
 
-    @Autowired
-    ContestRepository contestRepository;
+    @GetMapping("/admin/create-account")
+    public String showAdminRegistrationPage(@PathVariable(required = false) String regError,  Model model){
 
-    @GetMapping("admin/create-account")
-    public String showAdminRegistrationPage(Model model){
+
         model.addAttribute("registerRequest", RegistrationRequest.class);
-        return "adminRegistration";
+        return "admin-login";
     }
 
-    @GetMapping("admin/dashboard")
-    public String showAdminDashboard(Model model){
-        AppUser user = new AppUser("Ambrose", "Kyusya");
-        model.addAttribute("userDetails", user);
+    @GetMapping("/admin/dashboard")
+    public String showAdminDashboard(Model model, Principal principal){
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+        Character letter = user.getFullName().charAt(0);
+        model.addAttribute("letter", letter);
+        model.addAttribute("name",  user.getFullName());
         return "dashboard";
     }
 
     @GetMapping("users/dashboard")
-    public String showUserDashboard(Model model){
-
-        AppUser user = new AppUser("Ambrose", "Kyusya");
-        model.addAttribute("userDetails", user);
-        return "user";
-    }
-
-    @GetMapping("users")
-    public String showAllUsers(Model model){
-        AppUser user = new AppUser("Ambrose", "Kyusya");
-        model.addAttribute("userDetails", user);
+    public String showUserDashboard(Model model, Principal principal){
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+        Character letter = user.getFullName().charAt(0);
+        model.addAttribute("letter", letter);
+        model.addAttribute("name",  user.getFullName());
         return "user";
     }
 
     @GetMapping("users/edit/{id}")
     public String showUserEditPage(@PathVariable Long id, Model model){
         AppUser user = appUserRepository.findById(id).get();
+        user.getStringName();
         model.addAttribute("user", user);
         model.addAttribute("userUpdate", new RegistrationRequest());
         return "edit-profile";
     }
 
-    @GetMapping("contests/edit/{id}")
-    public String showContestEditPage(@PathVariable int id, Model model){
-        Contest contest = contestRepository.findById(id).get();
-        model.addAttribute("contest", contest);
-        model.addAttribute("contestUpdate", new Contest());
-        return "edit-contest";
-    }
 
     @GetMapping("contestants/edit/{id}")
     public String showContestantEditPage(@PathVariable int id, Model model){
-        Contestant contestant = contestantRepository.findById(id).get();
+        Contestant contestant = new Contestant();
         model.addAttribute("contest", contestant);
         model.addAttribute("contestantUpdate", new Contestant());
         return "edit-contestant";
@@ -87,9 +72,23 @@ public class PagesController {
         return "login";
     }
 
+    @GetMapping("/users/add-user-page")
+    public String showAddUserPage(Model model){
+        model.addAttribute("regRequest", new RegistrationRequest());
+        return "add-new-user";
+    }
+
+    @GetMapping("/users/add-contestant-page")
+    public String showAddContestantPage(Model model){
+        model.addAttribute("contestant", new Contestant());
+        return "add-contestant";
+    }
+
+
     @GetMapping("/profile")
     public String getProfile(Model model, Principal principal){
         AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+        user.getStringName();
         model.addAttribute("user", user);
         return "profile";
     }

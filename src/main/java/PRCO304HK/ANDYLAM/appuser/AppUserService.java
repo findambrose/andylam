@@ -1,5 +1,6 @@
 package PRCO304HK.ANDYLAM.appuser;
 
+import PRCO304HK.ANDYLAM.registration.RegistrationRequest;
 import PRCO304HK.ANDYLAM.registration.token.ConfirmationToken;
 import PRCO304HK.ANDYLAM.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -23,13 +28,17 @@ public class AppUserService implements UserDetailsService {
             "user with email %s not found";
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    public AppUserRepository appUserRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private ConfirmationTokenService confirmationTokenService;
+
+
+    @Autowired
+    private EntityManager em;
 
     @Override
     public UserDetails loadUserByUsername(String email)
@@ -46,7 +55,7 @@ public class AppUserService implements UserDetailsService {
         }
     }
 
-    public String signUpUser(AppUser appUser) {
+    public String signUpUser(AppUser appUser, RedirectAttributes at) {
         boolean userExists = appUserRepository
                 .findByEmail(appUser.getUsername())
                 .isPresent();
@@ -55,8 +64,8 @@ public class AppUserService implements UserDetailsService {
 
             // TODO check of attributes are the same and
             // TODO if email not confirmed send confirmation email.
-
-            throw new IllegalStateException("email already taken");
+            at.addFlashAttribute("emailinuse", "Emil address is taken.");
+           // throw new IllegalStateException("email already taken");
         }
 
         String encodedPassword = bCryptPasswordEncoder
@@ -83,5 +92,12 @@ public class AppUserService implements UserDetailsService {
 
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
+    }
+
+    public String update(RegistrationRequest request) {
+
+        AppUserRole appUserRole = request.getRole() == "ADMIN" ? AppUserRole.ADMIN : AppUserRole.USER;
+        appUserRepository.updateAppUser(request.getEmail(), appUserRole, request.getFirstName(), request.getLastName());
+        return "redirect:/users/get";
     }
 }

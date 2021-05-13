@@ -50,7 +50,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
 						<!--begin::Aside header-->
 						<a href="#" class="text-center mb-10">
-							<img src="assets/media/logos/logo-letter-1.png" class="max-h-70px" alt="" />
+
 						</a>
 						<!--end::Aside header-->
 						<!--begin::Aside title-->
@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</div>
 					<!--end::Aside Top-->
 					<!--begin::Aside Bottom-->
-					<div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" th:style="'background: url(assets/media/svg/illustrations/login-visual-1.svg);'"></div>
+					<div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" ></div>
 					<!--end::Aside Bottom-->
 				</div>
 				<!--begin::Aside-->
@@ -76,6 +76,13 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 							<div th:if="${param.logout}">
 								<div class="alert alert-info">You have been logged out.</div>
+							</div>
+							<div th:if="${param.idinuse}">
+								<div class="alert alert-info">Id already in use.</div>
+							</div>
+
+							<div th:if="${param.invalidemail}">
+								<div class="alert alert-info">Email address invalid.</div>
 							</div>
 							<!--begin::Form-->
 							<form class="form" th:action="@{/login}"
@@ -99,11 +106,11 @@ License: You must have a valid license purchased only from themeforest(the above
 										<label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
 										<a href="javascript:;" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5" id="kt_login_forgot">Forgot Password ?</a>
 									</div>
-									<input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
+									<input id="" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Action-->
-								<div class="pb-lg-0 pb-5">
+                                password							<div class="pb-lg-0 pb-5">
 									<button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
 
 
@@ -144,7 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Form group-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="password" placeholder="Password" name="password" autocomplete="off" />
+									<input id="password" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="password" placeholder="Password" name="password" autocomplete="off" />
 								</div>
 
 								<!--end::Form group-->
@@ -210,6 +217,29 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/custom/login/login-general.js?v=7.0.3"></script>
 		<!--end::Page Scripts-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="pwstrength.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                options = {
+                    common: {minChar:8},
+                    ui: {
+                        showVerdictsInsideProgressBar:true,
+                        showErrors:true,
+                        errorMessages:{
+                            wordLength: '<spring:message code="error.wordLength"/>',
+                            wordNotEmail: '<spring:message code="error.wordNotEmail"/>',
+                            wordSequences: '<spring:message code="error.wordSequences"/>',
+                            wordLowercase: '<spring:message code="error.wordLowercase"/>',
+                            wordUppercase: '<spring:message code="error.wordUppercase"/>',
+                            wordOneNumber: '<spring:message code="error.wordOneNumber"/>',
+                            wordOneSpecialChar: '<spring:message code="error.wordOneSpecialChar"/>'
+                        }
+                    }
+                };
+                $('#password').pwstrength(options);
+            });
+        </script>
 	</body>
 	<!--end::Body--> 
 </html>

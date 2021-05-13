@@ -1,6 +1,4 @@
 package PRCO304HK.ANDYLAM.contestants;
-
-import PRCO304HK.ANDYLAM.contests.Contest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +13,9 @@ public class ContestantController {
     @Autowired
     ContestantService contestantService;
 
-    @PostMapping("/contestants")
+    @PostMapping("/contestants/add")
     public void save(Contestant c){
-        contestantService.save(c);
+        contestantService.addContestant(c);
     }
 
     @GetMapping("/contestants")
@@ -28,8 +26,10 @@ public class ContestantController {
     }
 
     @PostMapping("/contestants/update")
-    public void update(Contest contest){
-        contestantService.update(contest);
+    public void update(Contestant contest){
+        contestantService.updateContestant(contest);
+
+
     }
 
     @GetMapping("/contestants/delete")

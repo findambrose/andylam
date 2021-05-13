@@ -8,14 +8,13 @@ import java.util.List;
 @Service
 public class ResultService {
 
-    @Autowired
-    ResultRepsitory resultRepsitory;
-
-    public List<Result> getByContestId (int id){
-       return resultRepsitory.findByContestId(id);
+    public int getTotalVotes (int contestantId){
+        //Get total votes
+        int votes = 5;
+        return votes;
     }
 
-    public void updateVote(Result s){
-        resultRepsitory.save(s);
+    public void vote(Vote vote){
+        //Interact with bchain to vote
     }
 }

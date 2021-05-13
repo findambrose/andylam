@@ -68,7 +68,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<!--begin::Card-->
 										<div class="card card-custom gutter-b example example-compact">
 											<div class="card-header">
-												<h3 class="card-title">Add New Contest</h3>
+												<h3 class="card-title">Add New Contestant</h3>
 												<div class="card-toolbar">
 													<div class="example-tools justify-content-center">
 														<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
@@ -77,15 +77,21 @@ License: You must have a valid license purchased only from themeforest(the above
 												</div>
 											</div>
 											<!--begin::Form-->
-											<form th:action = "@{/contests}" th:object = "${contest}" method="post" class="form">
+											<form th:action = "@{/contestants}" th:object = "${contestant}" method="post" class="form">
 												<div class="card-body">
 													<div class="form-group">
-														<label>Contest Name:</label>
-														<input type="text" class="form-control form-control-solid" placeholder="Enter Contest Name" />
-														<span class="form-text text-muted">Please enter the contest name</span>
+														<label>Contestant Name:</label>
+														<input required type="text" name="name" class="form-control form-control-solid" placeholder="Enter Contest Name" />
+														<span class="form-text text-muted">Please enter the contestant name</span>
+													</div>
+
+													<div class="form-group">
+														<label>Contestant's Party name:</label>
+														<input required type="text" name="party" class="form-control form-control-solid" placeholder="Enter Contest Party Name" />
+														<span class="form-text text-muted">Please enter the contestant's party name</span>
 													</div>
 													<!--begin: Code-->
-													<div class="example-code mt-10">
+													<div style="display: none" class="example-code mt-10">
 														<ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
 															<li class="nav-item">
 																<a class="nav-link active" data-toggle="tab" href="#example_code_html">HTML</a>
@@ -94,7 +100,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														<div class="tab-content">
 															<div class="tab-pane active" id="example_code_html" role="tabpanel">
 																<div class="example-highlight">
-																	<pre style="height:400px">
+																	<pre style="height:400px; display: none">
 <code class="language-html">
         &lt;form class="form"&gt;
          &lt;div class="card-body"&gt;

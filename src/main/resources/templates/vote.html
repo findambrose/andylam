@@ -7,12 +7,12 @@
 -->
 
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" lang="en">
 <head>
          <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>BlockVote | Contests</title>
+        <title>BlockVote | Cast Vote</title>
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -22,28 +22,42 @@
 <div class="container text-center">
       
         <div>
-            <h1>All Contests</h1>
+            <h3>Cast Vote</h3>
         </div>
          
         <div>
             <table class="table table-striped table-bordered">
                 <thead class="thead-light">
                 <tr>
-                        <th>No.</th>
-                        <th>Contest ID</th>
-                        <th>Contest Name</th>
-                        <th>Actions</th>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Party</th>
+                    <th>Votes</th>
+                    <th>Actions</th>
                     </tr>
             </thead>
                 <tbody>
-                <tr th:each="contest, iteration: ${contests}">
-                        <td th:text='${iteration.index+1}'>No.</td>
-                        <td th:text="${contest.id}">Contest Id</td>
-                        <td th:text="${contest.name}">Contest Name</td> 
-                        <td>
-                            <a th:href="@{/contests/edit/{id}(id = ${contest.id})}" class="btn btn-primary">Edit</a>
-                            <a style="margin-top: 10px" th:href="@{/contests/delete/{id}(id = ${contest.id})}" class="btn btn-danger">Delete</a>
-                       </td>
+                <tr th:each="user, iteration: ${users}">
+    <td th:text='${iteration.index+1}'>No.</td>
+                        <td th:text="${candidate.totalVotes}">Name</td>
+                        <td th:text="${candidate.party}">Party</td> 
+    <td th:text="${candidate.totalVotes}">Votes</td>
+    <td>
+        <ul  style="list-style: none">
+
+
+            <li style="display: inline">
+                <form th:action = "@{/vote}"  th:object = "${vote}"  method="post">
+                        <input type="hidden" value="${userId}" name = "userId">
+                        <input type="hidden" value="${contestant.id}" name = "contestantId">
+
+                    <button type="submit" class="btn btn-primary">Vote</button>
+                </form>
+
+
+            </li>
+        </ul>
+    </td>
                     </tr>
             </tbody>
             </table>

@@ -5,22 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+
 public class Contestant {
 
-    @Id
-    @GeneratedValue
+
     private int id;
     private String name;
-    private int contestId;
 
-    public int getContestId() {
-        return contestId;
+    public String getParty() {
+        return party;
     }
 
-    public void setContestId(int contestId) {
-        this.contestId = contestId;
+    public void setParty(String party) {
+        this.party = party;
     }
+
+    private String party;
 
     public int getId() {
         return id;

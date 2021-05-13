@@ -15,7 +15,6 @@ import java.util.Collections;
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
 
@@ -35,7 +34,27 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    public String stringRole;
+    @Column(unique = true)
     private String idNumber;
+    public String name;
+
+    public String getFullName(){
+        name = firstName + " " + lastName;
+        return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void getStringName(){
+        stringRole = appUserRole.name();
+    }
 
     public String getIdNumber() {
         return idNumber;
@@ -50,14 +69,18 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = false;
 
+    public AppUser(){}
+
     public AppUser(String firstName,
                    String lastName,
                    String email,
+                   String idNumber,
                    String password,
                    AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.idNumber = idNumber;
         this.password = password;
         this.appUserRole = appUserRole;
     }
@@ -76,7 +99,7 @@ public class AppUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(appUserRole.name());
+                new SimpleGrantedAuthority("ROLE_"+appUserRole.name());
         return Collections.singletonList(authority);
     }
 

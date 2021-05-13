@@ -113,13 +113,13 @@ License: You must have a valid license purchased only from themeforest(the above
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label text-right">Last Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" th:value="${user.lastName}" />
+															<input disabled class="form-control form-control-lg form-control-solid" type="text" th:value="${user.lastName}" />
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label text-right" >Role</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" th:value="${user.role}" />
+															<input disabled class="form-control form-control-lg form-control-solid" type="text" th:value="${user.stringRole}" />
 														
 														</div>
 													</div>
@@ -138,7 +138,7 @@ License: You must have a valid license purchased only from themeforest(the above
 																		<i class="la la-phone"></i>
 																	</span>
 																</div>
-																<input type="text" class="form-control form-control-lg form-control-solid" th:value="${user.email}" placeholder="Phone" />
+																<input disabled type="text" class="form-control form-control-lg form-control-solid" th:value="${user.email}" placeholder="Phone" />
 															</div>
 															<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 														</div>

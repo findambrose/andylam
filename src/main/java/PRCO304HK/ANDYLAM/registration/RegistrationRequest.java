@@ -1,5 +1,6 @@
 package PRCO304HK.ANDYLAM.registration;
 
+import PRCO304HK.ANDYLAM.PasswordValidator.ValidPassword;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,10 +13,19 @@ public class RegistrationRequest {
     private String firstName;
     private String lastName;
     private  String email;
+
+    @ValidPassword
     private  String password;
+    private String role;
     private String idNumber;
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getIdNumber() {
         return idNumber;

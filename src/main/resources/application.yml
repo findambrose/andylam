@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     password:
-    url: jdbc:mysql://localhost:3306/blockvote
+    url: jdbc:mysql://localhost:3306/andyapp
     username: root
 
   jpa:

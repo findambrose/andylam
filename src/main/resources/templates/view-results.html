@@ -12,7 +12,7 @@
          <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>BlockVote | All Contestants</title>
+        <title>BlockVote | View Results</title>
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
 <div class="container text-center">
       
         <div>
-            <h3>All Contestants</h3>
+            <h3>View Results</h3>
         </div>
          
         <div>
@@ -33,23 +33,16 @@
                     <th>Name</th>
                     <th>Party</th>
                     <th>Votes</th>
-                    <th>Actions</th>
+
                     </tr>
             </thead>
                 <tbody>
                 <tr th:each="user, iteration: ${users}">
-    <td th:text='${iteration.index+1}'>No.</td>
-                        <td th:text="${user.idNumber}">Name</td>
-                        <td th:text="${user.name}">Party</td> 
-    <td th:text="${user.stringRole}">Votes</td>
-    <td>
-        <ul  style="list-style: none">
-            <li style="display: inline"><a th:href="@{/users/edit/{id}(id = ${user.id})}" class="btn btn-primary">View Profile</a></li>
-            <li  style="display: inline"><a  th:href="@{/contestants/edit{id}(id = ${user.id})}" class="btn btn-danger">Edit</a></li>
-            <li style="display: inline"><a th:href="@{/users/edit/{id}(id = ${user.id})}" class="btn btn-primary">View Profile</a></li>
+                        <td th:text='${iteration.index+1}'>No.</td>
+                        <td th:text="${candidate.totalVotes}">Name</td>
+                        <td th:text="${candidate.party}">Party</td> 
+                        <td th:text="${candidate.totalVotes}">Votes</td>
 
-        </ul>
-    </td>
                     </tr>
             </tbody>
             </table>

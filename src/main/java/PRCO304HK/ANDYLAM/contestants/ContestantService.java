@@ -1,54 +1,53 @@
 package PRCO304HK.ANDYLAM.contestants;
-
-
-import PRCO304HK.ANDYLAM.contests.Contest;
-import PRCO304HK.ANDYLAM.results.Result;
 import PRCO304HK.ANDYLAM.results.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ContestantService {
-    @Autowired
-    ContestantRepository contestantRepository;
+
 
     @Autowired
     ResultService resultService;
 
     public List<Contestant> get(){
         List<Contestant> contestList = new ArrayList<>();
-        contestantRepository.findAll().forEach(contest -> contestList.add(contest));
+
         return contestList;
     }
 
-    public List<Contestant> getByContestId(int id){
-        List<Contestant> contestList = new ArrayList<>();
-        contestantRepository.findAll().forEach(contest -> contestList.add(contest));
-        return contestList;
+    public Contestant getContestantById(int id){
+        Contestant contestant = new Contestant();
+        contestant.setId(1);
+        contestant.setName("Ambrose");
+        return contestant;
     }
 
-    public Contestant save(Contestant c){
-
+    public Contestant addContestant(Contestant c){
         //set contestant's initial vote count to 0
-        Result _initial = new Result();
-        _initial.setContestantId(c.getContestId());
-        _initial.setContestId(c.getContestId());
-        _initial.setCount(0);
-        resultService.updateVote(_initial);
-        return contestantRepository.save(c);
+        Contestant contestant = new Contestant();
+        contestant.setId(1);
+        contestant.setName("Ambrose");
+        return contestant;
+
     }
 
-    public void update(Contest contest) {
-        //TODO: Update contest
+    public Contestant updateContestant(Contestant c){
+        //set contestant's initial vote count to 0
+        Contestant contestant = new Contestant();
+        contestant.setId(1);
+        contestant.setName("Ambrose");
+        return contestant;
+
     }
+
 
     public void delete(int id) {
 
         Contestant contestant = new Contestant();
         contestant.setId(id);
-        contestantRepository.delete(contestant);
+
     }
 }
